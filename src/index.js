@@ -2,7 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const PORT = process.env.PUERTO || 4002;
+const PORT = process.env.PORT || 4002;
 
 // 2.MIDDLEWARES
 app.use(express.json());
