@@ -5,7 +5,7 @@ const {
   createPelicula,
   updatePelicula,
   deletePelicula,
-} = require("../controllers/pelicula.controllers");
+} = require("../controllers/peliculas.controllers");
 
 const router = Router();
 

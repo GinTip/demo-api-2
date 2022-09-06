@@ -1,42 +1,45 @@
 const { users } = require("../database/db");
-const { v4: uuid } = require("uuid");
+const User = require("../models/user");
 
-const getUsers = (req, res) => {
+const getUsers =  async (req, res) => {
+
+  const usuarios = await User.find()
+
   return res.json({
     ok: true,
     msg: "Usuarios obtenidos",
-    data: users,
+    data: usuarios,
   });
 };
 
-const   createUser = (req, res) => {
-  const { user_name, password } = req.body
+const createUser = async (req, res) => {
+  const { email, username, password } = req.body
 
   const user = {
-    id: uuid(),
-    user_name: user_name,
+    email: email,
+    username: username,
     password: password,
   }
 
-  users.push(user);
+  const nuevoUsuario = await User.create(user);
 
-  return res.json({
+  return res.status(201).json({
     ok: true,
     msg: "Usuario creado",
-    data: user,
+    data: nuevoUsuario,
   })
 };
 
 const updateUser = (req, res) => {
 
   const { idUser } = req.params;
-  const { user_name, password } = req.body;
+  const { username, password } = req.body;
 
   const usuarioEncontrado = users.find((user) => {
     return user.id === idUser;
   });
 
-  usuarioEncontrado.user_name = user_name;
+  usuarioEncontrado.username = username;
   usuarioEncontrado.password = password;
 
   return res.json({
